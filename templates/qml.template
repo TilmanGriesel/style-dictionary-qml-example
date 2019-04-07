@@ -1,0 +1,22 @@
+<%
+  var output = '';
+  output += 'import QtQuick 2.0\n\n'
+  output += 'QtObject {\n'
+  output += allProperties.map(function(prop){
+      var line = '';
+      var propertyType = 'real';
+      if (prop.attributes.category === 'color') {
+        propertyType = 'color';
+      }
+      line += '    '
+      line += 'readonly property ' + propertyType;
+      line += ' ' + prop.name;
+      line += ': ' + prop.value;
+      if (prop.comment) {
+        line += ' // ' + prop.comment;
+      }
+      return line;
+  }).join('\n');
+  output += '\n}';
+  print(output);
+%>

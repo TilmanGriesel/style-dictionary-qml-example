@@ -1,0 +1,13 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "qml": {
+      "transformGroup": "custom/qml",
+      "buildPath": "build/qml/",
+      "files": [{
+        "destination": "Tokens.qml",
+        "format": "custom/format/qml"
+      }]
+    }
+  }
+}
