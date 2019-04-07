@@ -10,23 +10,22 @@ StyleDictionary.registerFormat({
 });
 
 StyleDictionary.registerTransform({
-  name: 'color/qtrgba',
+  name: 'color/qthex8',
   type: 'value',
   matcher: function(prop) {
       return prop.attributes.category === 'color';
   },
   transformer: function(prop) {
-      var rgb = Color(prop.value).toRgb();
-      var r = Math.round((rgb.r / 255) * 100) / 100;
-      var g = Math.round((rgb.g / 255) * 100) / 100;
-      var b = Math.round((rgb.b / 255) * 100) / 100;
-      return 'Qt.rgba(' + r + ','+ g + ',' + b + ',' + rgb.a + ')';
+    // Qt is using ARGB hex8
+    var str = Color(prop.value).toHex8();
+    output = '#' + str.slice(6) + str.slice(0,6);
+    return '\"' + output + '\"';
   }
 });
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/qml',
-  transforms: ['attribute/cti', 'name/cti/camel', 'color/qtrgba']
+  transforms: ['attribute/cti', 'name/cti/camel', 'color/qthex8']
 });
 
 StyleDictionary.buildAllPlatforms();
